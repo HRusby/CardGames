@@ -1,4 +1,5 @@
 public class Deck
+
 {
     public Deck(List<ICard> cards)
     {
@@ -7,10 +8,17 @@ public class Deck
 
     public List<ICard> Cards { get; }
 
-    // Method to Shuffle the Deck
+    // Method to Shuffle the Deck implements a version of the Fisher-Yates Shuffle
     public void Shuffle()
     {
-
+      int deckPos = Cards.Count();
+      while (deckPos > 1){
+        deckPos--;
+        int randomPos = ThreadSafeRandom.ThisThreadsRandom.Next(deckPos+1);
+        ICard value = Cards[randomPos];
+        Cards[randomPos] = Cards[deckPos];
+        Cards[deckPos] = value;
+      }
     }
 
     // Method to Deal n number of cards to i Hands
@@ -42,5 +50,21 @@ public class Deck
             }   
         }
         return new Deck(StandardDeckCards);
+    }
+
+    public override bool Equals(object? obj)
+    {
+        if(obj == null) return false;
+        Deck? otherDeck = obj as Deck;
+        if(otherDeck == null) throw new ArgumentException("obj is not a Deck"); 
+        // If Card Counts are not equal return false
+        if(Cards.Count() != otherDeck.Cards.Count()) return false;
+        // If Card Ordering is not the same then return false
+        return Enumerable.SequenceEqual(Cards, otherDeck.Cards);
+    }
+
+    public override int GetHashCode()
+    {
+        return Cards.GetHashCode() + base.GetHashCode();
     }
 }
