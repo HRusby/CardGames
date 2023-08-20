@@ -1,15 +1,14 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 // Output each card in both lists in order if the same highlight Green
-void PrintComparison(IEnumerable<ICard> A, IEnumerable<ICard> B){
+void PrintComparison(IEnumerable<ACard> A, IEnumerable<ACard> B){
   if(A.Count() != B.Count()){
     throw new Exception("Comparison Arguments are not of the same length");
   }
   int maxDisplayLength = 20;
   for(int i = 0; i < A.Count(); i++){
-    ICard cardA = A.ElementAt(i);
-    ICard cardB = B.ElementAt(i);
-    if(cardA.Equals(cardB)) Console.ForegroundColor = ConsoleColor.Green;
+    ACard cardA = A.ElementAt(i);
+    ACard cardB = B.ElementAt(i);
     Console.WriteLine($"{cardA.ToString().PadLeft(maxDisplayLength)}|{cardB.ToString().PadRight(maxDisplayLength)}");
     Console.ResetColor();
   }

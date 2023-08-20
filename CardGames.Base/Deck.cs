@@ -1,12 +1,12 @@
 public class Deck
 
 {
-    public Deck(List<ICard> cards)
+    public Deck(List<ACard> cards)
     {
         Cards = cards;
     }
 
-    public List<ICard> Cards { get; }
+    public List<ACard> Cards { get; }
 
     // Method to Shuffle the Deck implements a version of the Fisher-Yates Shuffle
     public void Shuffle()
@@ -15,7 +15,7 @@ public class Deck
       while (deckPos > 1){
         deckPos--;
         int randomPos = ThreadSafeRandom.ThisThreadsRandom.Next(deckPos+1);
-        ICard value = Cards[randomPos];
+        ACard value = Cards[randomPos];
         Cards[randomPos] = Cards[deckPos];
         Cards[deckPos] = value;
       }
@@ -29,7 +29,7 @@ public class Deck
 
     public static Deck BuildStandardDeck(int aceHighValue = 15)
     {
-        List<ICard> StandardDeckCards = new(); 
+        List<ACard> StandardDeckCards = new(); 
         foreach(Suit suit in Enum.GetValues<Suit>().Cast<Suit>()){
             for(int i = 1; i < 14; i++){
                 if (i.Equals(1))

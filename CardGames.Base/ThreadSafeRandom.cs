@@ -1,6 +1,6 @@
 public static class ThreadSafeRandom
 {
-   [ThreadStatic] private static Random Local;
+   [ThreadStatic] private static Random? Local;
    public static Random ThisThreadsRandom
    {
      get { 
