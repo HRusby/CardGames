@@ -10,4 +10,11 @@ public class Ace : ACard, ICard
         this.lowValue = lowValue;
         this.highValue = highValue;
     }
+    
+    public void ChangeValue(){
+      if(Value.Equals(lowValue))
+        Value = highValue;
+      else
+        Value = lowValue;
+    }
 }
